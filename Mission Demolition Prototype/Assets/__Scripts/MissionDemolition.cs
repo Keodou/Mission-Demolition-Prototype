@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public enum GameMode
 {
@@ -11,11 +12,14 @@ public enum GameMode
 public class MissionDemolition : MonoBehaviour
 {
     static private MissionDemolition S;
+    static public GameObject uitRestartButton;
+
 
     [Header("Set In Inspector")]
     public Text uitLevel;
     public Text uitShots;
     public Text uitButton;
+    public GameObject prefabButton;
     public Vector3 castlePos;
     public GameObject[] castles;
 
@@ -83,6 +87,12 @@ public class MissionDemolition : MonoBehaviour
             mode = GameMode.levelEnd;
             SwitchView("ShowBoth");
             Invoke("NextLevel", 2f);
+        }
+
+        //show restart button
+        if (S.shotsTaken >= 5)
+        {
+            prefabButton.SetActive(true);
         }
     }
 
